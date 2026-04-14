@@ -5,70 +5,80 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Burak'ın Dev Royale Arşivi</title>
     <style>
-        :root { --sari: #fdb912; --kirmizi: #a90432; --koyu: #0a0a0a; --evrim: #c300ff; --sampiyon: #ffcc00; --ender: #ff7e00; --efsane: #00d2ff; }
+        :root { --sari: #fdb912; --kirmizi: #a90432; --koyu: #0a0a0a; --evrim: #c300ff; --sampiyon: #ffcc00; --efsane: #00d2ff; --ender: #ff7e00; }
         body { background-color: var(--koyu); color: white; font-family: 'Segoe UI', sans-serif; text-align: center; margin: 0; padding-bottom: 50px; }
-        header { background: linear-gradient(135deg, var(--kirmizi), var(--sari)); padding: 30px; border-bottom: 4px solid #fff; position: sticky; top: 0; z-index: 100; }
-        
-        .section-title { color: var(--sari); margin-top: 50px; text-transform: uppercase; font-size: 1.5em; border-left: 5px solid var(--sari); border-right: 5px solid var(--sari); display: inline-block; padding: 0 30px; background: rgba(255,255,255,0.05); }
-        
-        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(110px, 1fr)); gap: 15px; padding: 25px; max-width: 1200px; margin: 0 auto; }
-        
-        .card { background: #1a1a1a; border-radius: 12px; padding: 10px; border: 1px solid #333; transition: 0.3s; position: relative; }
-        .card:hover { transform: translateY(-10px) scale(1.05); border-color: white; box-shadow: 0 10px 20px rgba(0,0,0,0.5); }
-        .card img { width: 100%; height: auto; border-radius: 8px; filter: drop-shadow(0 5px 5px black); }
-        .card-name { font-size: 0.85em; margin-top: 10px; font-weight: bold; color: #fff; text-shadow: 1px 1px 2px #000; }
-
-        /* Özel Çerçeveler */
-        .card.evo { border: 2px solid var(--evrim); box-shadow: 0 0 15px rgba(195, 0, 255, 0.4); }
-        .card.hero { border: 2px solid var(--sampiyon); box-shadow: 0 0 15px rgba(255, 204, 0, 0.4); }
-        .card.legendary { border: 2px solid var(--efsane); }
-
-        .tag { position: absolute; top: -5px; right: -5px; font-size: 0.6em; padding: 2px 6px; border-radius: 4px; font-weight: bold; text-transform: uppercase; }
-        .tag-evo { background: var(--evrim); }
-        .tag-hero { background: var(--sampiyon); color: black; }
+        header { background: linear-gradient(135deg, var(--kirmizi), var(--sari)); padding: 25px; border-bottom: 4px solid #fff; position: sticky; top: 0; z-index: 100; }
+        .section-title { color: var(--sari); margin-top: 40px; text-transform: uppercase; font-size: 1.4em; border-bottom: 3px solid var(--sari); display: inline-block; padding: 5px 20px; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(100px, 1fr)); gap: 12px; padding: 20px; max-width: 1100px; margin: 0 auto; }
+        .card { background: #1a1a1a; border-radius: 10px; padding: 8px; border: 1px solid #333; transition: 0.2s; position: relative; }
+        .card:hover { transform: scale(1.1); z-index: 5; border-color: white; box-shadow: 0 0 15px rgba(255,255,255,0.2); }
+        .card img { width: 100%; height: auto; border-radius: 5px; }
+        .card-name { font-size: 0.75em; margin-top: 8px; font-weight: bold; color: #eee; }
+        .hero { border: 2px solid var(--sampiyon) !important; box-shadow: 0 0 10px rgba(255,204,0,0.4); }
+        .evo { border: 2px solid var(--evrim) !important; box-shadow: 0 0 10px rgba(195,0,255,0.4); }
+        .legend { border: 2px solid var(--efsane) !important; }
     </style>
 </head>
 <body>
 
 <header>
     <h1>BURAK'IN DEV ROYALE ARŞİVİ 👑</h1>
-    <p>Tüm Kartlar, Şampiyonlar ve Evrimler</p>
+    <p>40+ Kartlı Tam Koleksiyon</p>
 </header>
 
 <h2 class="section-title">🏆 ŞAMPİYONLAR</h2>
 <div class="grid">
-    <div class="card hero"><span class="tag tag-hero">Hero</span><img src="https://raw.githubusercontent.com/RoyaleAPI/cr-api-assets/master/cards/little-prince.png"><div class="card-name">Küçük Prens</div></div>
-    <div class="card hero"><span class="tag tag-hero">Hero</span><img src="https://raw.githubusercontent.com/RoyaleAPI/cr-api-assets/master/cards/skeleton-king.png"><div class="card-name">İskelet Kral</div></div>
-    <div class="card hero"><span class="tag tag-hero">Hero</span><img src="https://raw.githubusercontent.com/RoyaleAPI/cr-api-assets/master/cards/archer-queen.png"><div class="card-name">Okçu Kraliçe</div></div>
-    <div class="card hero"><span class="tag tag-hero">Hero</span><img src="https://raw.githubusercontent.com/RoyaleAPI/cr-api-assets/master/cards/mighty-miner.png"><div class="card-name">Mahir Madenci</div></div>
-    <div class="card hero"><span class="tag tag-hero">Hero</span><img src="https://raw.githubusercontent.com/RoyaleAPI/cr-api-assets/master/cards/monk.png"><div class="card-name">Keşiş</div></div>
-    <div class="card hero"><span class="tag tag-hero">Hero</span><img src="https://raw.githubusercontent.com/RoyaleAPI/cr-api-assets/master/cards/golden-knight.png"><div class="card-name">Altın Şövalye</div></div>
+    <div class="card hero"><img src="https://raw.githubusercontent.com/RoyaleAPI/cr-api-assets/master/cards/little-prince.png"><div class="card-name">Küçük Prens</div></div>
+    <div class="card hero"><img src="https://raw.githubusercontent.com/RoyaleAPI/cr-api-assets/master/cards/skeleton-king.png"><div class="card-name">İskelet Kral</div></div>
+    <div class="card hero"><img src="https://raw.githubusercontent.com/RoyaleAPI/cr-api-assets/master/cards/archer-queen.png"><div class="card-name">Okçu Kraliçe</div></div>
+    <div class="card hero"><img src="https://raw.githubusercontent.com/RoyaleAPI/cr-api-assets/master/cards/mighty-miner.png"><div class="card-name">Mahir Madenci</div></div>
+    <div class="card hero"><img src="https://raw.githubusercontent.com/RoyaleAPI/cr-api-assets/master/cards/monk.png"><div class="card-name">Keşiş</div></div>
+    <div class="card hero"><img src="https://raw.githubusercontent.com/RoyaleAPI/cr-api-assets/master/cards/golden-knight.png"><div class="card-name">Altın Şövalye</div></div>
 </div>
 
 <h2 class="section-title">💜 EVRİMLER</h2>
 <div class="grid">
-    <div class="card evo"><span class="tag tag-evo">Evo</span><img src="https://raw.githubusercontent.com/RoyaleAPI/cr-api-assets/master/cards/knight-evo.png"><div class="card-name">E. Şövalye</div></div>
-    <div class="card evo"><span class="tag tag-evo">Evo</span><img src="https://raw.githubusercontent.com/RoyaleAPI/cr-api-assets/master/cards/skeletons-evo.png"><div class="card-name">E. İskeletler</div></div>
-    <div class="card evo"><span class="tag tag-evo">Evo</span><img src="https://raw.githubusercontent.com/RoyaleAPI/cr-api-assets/master/cards/barbarians-evo.png"><div class="card-name">E. Barbarlar</div></div>
-    <div class="card evo"><span class="tag tag-evo">Evo</span><img src="https://raw.githubusercontent.com/RoyaleAPI/cr-api-assets/master/cards/royal-giant-evo.png"><div class="card-name">E. Kraliyet Devi</div></div>
-    <div class="card evo"><span class="tag tag-evo">Evo</span><img src="https://raw.githubusercontent.com/RoyaleAPI/cr-api-assets/master/cards/firecracker-evo.png"><div class="card-name">E. Fiçifis</div></div>
+    <div class="card evo"><img src="https://raw.githubusercontent.com/RoyaleAPI/cr-api-assets/master/cards/knight-evo.png"><div class="card-name">E. Şövalye</div></div>
+    <div class="card evo"><img src="https://raw.githubusercontent.com/RoyaleAPI/cr-api-assets/master/cards/skeletons-evo.png"><div class="card-name">E. İskeletler</div></div>
+    <div class="card evo"><img src="https://raw.githubusercontent.com/RoyaleAPI/cr-api-assets/master/cards/barbarians-evo.png"><div class="card-name">E. Barbarlar</div></div>
+    <div class="card evo"><img src="https://raw.githubusercontent.com/RoyaleAPI/cr-api-assets/master/cards/royal-giant-evo.png"><div class="card-name">E. K. Devi</div></div>
+    <div class="card evo"><img src="https://raw.githubusercontent.com/RoyaleAPI/cr-api-assets/master/cards/firecracker-evo.png"><div class="card-name">E. Fiçifis</div></div>
+    <div class="card evo"><img src="https://raw.githubusercontent.com/RoyaleAPI/cr-api-assets/master/cards/bats-evo.png"><div class="card-name">E. Yarasalar</div></div>
+    <div class="card evo"><img src="https://raw.githubusercontent.com/RoyaleAPI/cr-api-assets/master/cards/bomber-evo.png"><div class="card-name">E. Bombacı</div></div>
 </div>
 
 <h2 class="section-title">💎 EFSANEVİ VE DİĞERLERİ</h2>
 <div class="grid">
-    <div class="card legendary"><img src="https://raw.githubusercontent.com/RoyaleAPI/cr-api-assets/master/cards/mega-knight.png"><div class="card-name">Mega Şövalye</div></div>
-    <div class="card legendary"><img src="https://raw.githubusercontent.com/RoyaleAPI/cr-api-assets/master/cards/electro-wizard.png"><div class="card-name">E. Büyücü</div></div>
-    <div class="card legendary"><img src="https://raw.githubusercontent.com/RoyaleAPI/cr-api-assets/master/cards/bandit.png"><div class="card-name">Haydut</div></div>
-    <div class="card legendary"><img src="https://raw.githubusercontent.com/RoyaleAPI/cr-api-assets/master/cards/log.png"><div class="card-name">Tomruk</div></div>
+    <div class="card legend"><img src="https://raw.githubusercontent.com/RoyaleAPI/cr-api-assets/master/cards/mega-knight.png"><div class="card-name">Mega Şövalye</div></div>
+    <div class="card legend"><img src="https://raw.githubusercontent.com/RoyaleAPI/cr-api-assets/master/cards/electro-wizard.png"><div class="card-name">E. Büyücü</div></div>
+    <div class="card legend"><img src="https://raw.githubusercontent.com/RoyaleAPI/cr-api-assets/master/cards/bandit.png"><div class="card-name">Haydut</div></div>
+    <div class="card legend"><img src="https://raw.githubusercontent.com/RoyaleAPI/cr-api-assets/master/cards/log.png"><div class="card-name">Tomruk</div></div>
+    <div class="card legend"><img src="https://raw.githubusercontent.com/RoyaleAPI/cr-api-assets/master/cards/inferno-dragon.png"><div class="card-name">Cehennem Ejderi</div></div>
+    <div class="card legend"><img src="https://raw.githubusercontent.com/RoyaleAPI/cr-api-assets/master/cards/graveyard.png"><div class="card-name">Mezarlık</div></div>
+    <div class="card legend"><img src="https://raw.githubusercontent.com/RoyaleAPI/cr-api-assets/master/cards/magic-archer.png"><div class="card-name">Sihirli Okçu</div></div>
     <div class="card"><img src="https://raw.githubusercontent.com/RoyaleAPI/cr-api-assets/master/cards/pekka.png"><div class="card-name">P.E.K.K.A</div></div>
     <div class="card"><img src="https://raw.githubusercontent.com/RoyaleAPI/cr-api-assets/master/cards/elixir-golem.png"><div class="card-name">İksir Golemi</div></div>
     <div class="card"><img src="https://raw.githubusercontent.com/RoyaleAPI/cr-api-assets/master/cards/wizard.png"><div class="card-name">Büyücü</div></div>
     <div class="card"><img src="https://raw.githubusercontent.com/RoyaleAPI/cr-api-assets/master/cards/hog-rider.png"><div class="card-name">Binici</div></div>
-    <div class="card"><img src="https://raw.githubusercontent.com/RoyaleAPI/cr-api-assets/master/cards/balloon.png"><div class="card-name">Balon</div></div>
-    <div class="card"><img src="https://raw.githubusercontent.com/RoyaleAPI/cr-api-assets/master/cards/executioner.png"><div class="card-name">Cellat</div></div>
     <div class="card"><img src="https://raw.githubusercontent.com/RoyaleAPI/cr-api-assets/master/cards/valkyrie.png"><div class="card-name">Valkür</div></div>
+    <div class="card"><img src="https://raw.githubusercontent.com/RoyaleAPI/cr-api-assets/master/cards/executioner.png"><div class="card-name">Cellat</div></div>
     <div class="card"><img src="https://raw.githubusercontent.com/RoyaleAPI/cr-api-assets/master/cards/mini-pekka.png"><div class="card-name">Mini P.E.K.K.A</div></div>
+    <div class="card"><img src="https://raw.githubusercontent.com/RoyaleAPI/cr-api-assets/master/cards/baby-dragon.png"><div class="card-name">Yavru Ejder</div></div>
+    <div class="card"><img src="https://raw.githubusercontent.com/RoyaleAPI/cr-api-assets/master/cards/balloon.png"><div class="card-name">Balon</div></div>
+    <div class="card"><img src="https://raw.githubusercontent.com/RoyaleAPI/cr-api-assets/master/cards/skeleton-army.png"><div class="card-name">İskelet Ordusu</div></div>
+    <div class="card"><img src="https://raw.githubusercontent.com/RoyaleAPI/cr-api-assets/master/cards/goblin-barrel.png"><div class="card-name">Goblin Fıçısı</div></div>
+    <div class="card"><img src="https://raw.githubusercontent.com/RoyaleAPI/cr-api-assets/master/cards/prince.png"><div class="card-name">Prens</div></div>
+    <div class="card"><img src="https://raw.githubusercontent.com/RoyaleAPI/cr-api-assets/master/cards/dark-prince.png"><div class="card-name">Kara Prens</div></div>
+    <div class="card"><img src="https://raw.githubusercontent.com/RoyaleAPI/cr-api-assets/master/cards/ram-rider.png"><div class="card-name">Koç Binicisi</div></div>
+    <div class="card"><img src="https://raw.githubusercontent.com/RoyaleAPI/cr-api-assets/master/cards/electro-giant.png"><div class="card-name">E. Dev</div></div>
+    <div class="card"><img src="https://raw.githubusercontent.com/RoyaleAPI/cr-api-assets/master/cards/sparky.png"><div class="card-name">Sparky</div></div>
+    <div class="card"><img src="https://raw.githubusercontent.com/RoyaleAPI/cr-api-assets/master/cards/battle-ram.png"><div class="card-name">Koç Başı</div></div>
+    <div class="card"><img src="https://raw.githubusercontent.com/RoyaleAPI/cr-api-assets/master/cards/royal-hogs.png"><div class="card-name">Kraliyet Domuzları</div></div>
+    <div class="card"><img src="https://raw.githubusercontent.com/RoyaleAPI/cr-api-assets/master/cards/musketeer.png"><div class="card-name">Silahşör</div></div>
+    <div class="card"><img src="https://raw.githubusercontent.com/RoyaleAPI/cr-api-assets/master/cards/giant-skeleton.png"><div class="card-name">Dev İskelet</div></div>
 </div>
+
+<footer style="margin-top: 50px; color: #555;">© 2026 Burak - Tüm Royale Kartları Listelendi</footer>
 
 </body>
 </html>
