@@ -5,66 +5,54 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Burak'ın Dev Royale Arşivi</title>
     <style>
-        :root { --sari: #fdb912; --kirmizi: #a90432; --koyu: #0f0f0f; --evrim: #c300ff; --sampiyon: #ffcc00; }
+        :root { --sari: #fdb912; --kirmizi: #a90432; --koyu: #0c0c0c; --evrim: #c300ff; --sampiyon: #ffcc00; }
         body { background-color: var(--koyu); color: white; font-family: sans-serif; text-align: center; margin: 0; }
-        header { background: linear-gradient(135deg, var(--kirmizi), var(--sari)); padding: 30px; border-bottom: 5px solid white; }
-        
-        .bolum-baslik { color: var(--sari); margin-top: 40px; text-transform: uppercase; font-size: 1.5em; border-bottom: 2px solid var(--sari); display: inline-block; padding: 0 20px; }
-        
-        .kart-kutusu { padding: 20px; display: flex; flex-wrap: wrap; justify-content: center; gap: 15px; }
-        
-        .kart { 
-            background: #1e1e1e; border-radius: 10px; padding: 10px; 
-            width: 140px; border: 1px solid #333; transition: 0.2s;
-        }
-        .kart:hover { transform: scale(1.1); z-index: 5; border-color: white; }
-        .kart img { width: 100%; border-radius: 5px; }
-        .kart-isim { font-size: 0.9em; margin-top: 8px; font-weight: bold; }
-
-        /* Özel Kart Efektleri */
-        .evrim { border: 2px solid var(--evrim) !important; box-shadow: 0 0 10px var(--evrim); }
-        .sampiyon { border: 2px solid var(--sampiyon) !important; box-shadow: 0 0 10px var(--sampiyon); }
-        
-        .emoji-bar { font-size: 1.5em; margin: 10px 0; }
+        header { background: linear-gradient(135deg, var(--kirmizi), var(--sari)); padding: 25px; border-bottom: 3px solid white; box-shadow: 0 5px 15px rgba(0,0,0,0.8); }
+        h1 { margin: 0; font-size: 1.8em; text-shadow: 2px 2px 4px rgba(0,0,0,0.5); }
+        .bolum-baslik { color: var(--sari); margin-top: 30px; text-transform: uppercase; font-size: 1.2em; border-bottom: 2px solid var(--sari); display: inline-block; padding: 0 15px; letter-spacing: 1px; }
+        .kart-kutusu { padding: 15px; display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; }
+        .kart { background: #1a1a1a; border-radius: 8px; padding: 8px; width: 110px; border: 1px solid #2a2a2a; transition: 0.2s; box-sizing: border-box; position: relative; }
+        .kart:hover { transform: scale(1.08); border-color: white; z-index: 5; box-shadow: 0 0 10px rgba(255,255,255,0.2); }
+        .kart img { width: 100%; border-radius: 4px; display: block; object-fit: contain; }
+        .kart-isim { font-size: 0.8em; margin-top: 5px; font-weight: bold; color: #ddd; text-shadow: 1px 1px 2px black; }
+        .evrim { border: 2px solid var(--evrim) !important; box-shadow: 0 0 8px var(--evrim); }
+        .sampiyon { border: 2px solid var(--sampiyon) !important; box-shadow: 0 0 8px var(--sampiyon); }
+        footer { padding: 30px; color: #444; font-size: 0.8em; border-top: 1px solid #1a1a1a; margin-top: 30px; }
     </style>
 </head>
 <body>
-
-<header>
-    <h1>BURAK'IN DEV KART ARŞİVİ 👑</h1>
-    <div class="emoji-bar">⚔️ 🛡️ 💎 💣 🏹 ⚡ 🐉 💀</div>
-</header>
-
+<header><h1>BURAK'IN DEV KART ARŞİVİ 👑⚔️</h1></header>
 <h2 class="bolum-baslik">🏆 ŞAMPİYONLAR</h2>
 <div class="kart-kutusu">
-    <div class="kart sampiyon"><img src="https://statsroyale.com/images/cards/full/26000085.png"><div class="kart-isim">Küçük Prens</div></div>
-    <div class="kart sampiyon"><img src="https://statsroyale.com/images/cards/full/26000069.png"><div class="kart-isim">İskelet Kral</div></div>
-    <div class="kart sampiyon"><img src="https://statsroyale.com/images/cards/full/26000072.png"><div class="kart-isim">Okçu Kraliçe</div></div>
-    <div class="kart sampiyon"><img src="https://statsroyale.com/images/cards/full/26000074.png"><div class="kart-isim">Altın Şövalye</div></div>
-    <div class="kart sampiyon"><img src="https://statsroyale.com/images/cards/full/26000077.png"><div class="kart-isim">Keşiş</div></div>
+    <div class="kart sampiyon"><img src="https://cdn.statsroyale.com/images/cards/full/26000085.png"><div class="kart-isim">Küçük Prens</div></div>
+    <div class="kart sampiyon"><img src="https://cdn.statsroyale.com/images/cards/full/26000069.png"><div class="kart-isim">İskelet Kral</div></div>
+    <div class="kart sampiyon"><img src="https://cdn.statsroyale.com/images/cards/full/26000072.png"><div class="kart-isim">Okçu Kraliçe</div></div>
+    <div class="kart sampiyon"><img src="https://cdn.statsroyale.com/images/cards/full/26000074.png"><div class="kart-isim">Altın Şövalye</div></div>
+    <div class="kart sampiyon"><img src="https://cdn.statsroyale.com/images/cards/full/26000077.png"><div class="kart-isim">Keşiş</div></div>
 </div>
-
 <h2 class="bolum-baslik">💜 EVRİMLİ KARTLAR</h2>
 <div class="kart-kutusu">
-    <div class="kart evrim"><img src="https://statsroyale.com/images/cards/full/26000000.png"><div class="kart-isim">E. Şövalye</div></div>
-    <div class="kart evrim"><img src="https://statsroyale.com/images/cards/full/26000002.png"><div class="kart-isim">E. Okçular</div></div>
-    <div class="kart evrim"><img src="https://statsroyale.com/images/cards/full/26000010.png"><div class="kart-isim">E. İskeletler</div></div>
-    <div class="kart evrim"><img src="https://statsroyale.com/images/cards/full/26000011.png"><div class="kart-isim">E. Dev Krallar</div></div>
+    <div class="kart evrim"><img src="https://cdn.statsroyale.com/images/cards/full/26000000.png"><div class="kart-isim">E. Şövalye</div></div>
+    <div class="kart evrim"><img src="https://cdn.statsroyale.com/images/cards/full/26000002.png"><div class="kart-isim">E. Okçular</div></div>
+    <div class="kart evrim"><img src="https://cdn.statsroyale.com/images/cards/full/26000010.png"><div class="kart-isim">E. İskeletler</div></div>
+    <div class="kart evrim"><img src="https://cdn.statsroyale.com/images/cards/full/26000011.png"><div class="kart-isim">E. Dev Krallar</div></div>
 </div>
-
-<h2 class="bolum-baslik">🔥 DİĞER FAVORİ KARTLAR</h2>
+<h2 class="bolum-baslik">🔥 DİĞER KARTLAR (ARŞİV BAŞLADI)</h2>
 <div class="kart-kutusu">
-    <div class="kart"><img src="https://statsroyale.com/images/cards/full/26000055.png"><div class="kart-isim">Mega Şövalye</div></div>
-    <div class="kart"><img src="https://statsroyale.com/images/cards/full/26000067.png"><div class="kart-isim">İksir Golemi</div></div>
-    <div class="kart"><img src="https://statsroyale.com/images/cards/full/26000014.png"><div class="kart-isim">P.E.K.K.A</div></div>
-    <div class="kart"><img src="https://statsroyale.com/images/cards/full/26000049.png"><div class="kart-isim">Haydut</div></div>
-    <div class="kart"><img src="https://statsroyale.com/images/cards/full/26000032.png"><div class="kart-isim">Elektro Büyücü</div></div>
-    <div class="kart"><img src="https://statsroyale.com/images/cards/full/26000015.png"><div class="kart-isim">Minyon Sürüsü</div></div>
-    <div class="kart"><img src="https://statsroyale.com/images/cards/full/26000006.png"><div class="kart-isim">Dev</div></div>
-    <div class="kart"><img src="https://statsroyale.com/images/cards/full/28000000.png"><div class="kart-isim">Alev Topu</div></div>
+    <div class="kart"><img src="https://cdn.statsroyale.com/images/cards/full/26000055.png"><div class="kart-isim">Mega Şövalye</div></div>
+    <div class="kart"><img src="https://cdn.statsroyale.com/images/cards/full/26000067.png"><div class="kart-isim">İksir Golemi</div></div>
+    <div class="kart"><img src="https://cdn.statsroyale.com/images/cards/full/26000014.png"><div class="kart-isim">P.E.K.K.A.</div></div>
+    <div class="kart"><img src="https://cdn.statsroyale.com/images/cards/full/26000049.png"><div class="kart-isim">Haydut</div></div>
+    <div class="kart"><img src="https://cdn.statsroyale.com/images/cards/full/26000032.png"><div class="kart-isim">E. Büyücü</div></div>
+    <div class="kart"><img src="https://cdn.statsroyale.com/images/cards/full/26000015.png"><div class="kart-isim">Minyon Sürüsü</div></div>
+    <div class="kart"><img src="https://cdn.statsroyale.com/images/cards/full/26000006.png"><div class="kart-isim">Dev</div></div>
+    <div class="kart"><img src="https://cdn.statsroyale.com/images/cards/full/28000000.png"><div class="kart-isim">Alev Topu</div></div>
+    <div class="kart"><img src="https://cdn.statsroyale.com/images/cards/full/26000013.png"><div class="kart-isim">İskelet Ordusu</div></div>
+    <div class="kart"><img src="https://cdn.statsroyale.com/images/cards/full/26000021.png"><div class="kart-isim">Goblin Fıçısı</div></div>
+    <div class="kart"><img src="https://cdn.statsroyale.com/images/cards/full/26000004.png"><div class="kart-isim">Şövalye</div></div>
+    <div class="kart"><img src="https://cdn.statsroyale.com/images/cards/full/26000001.png"><div class="kart-isim">Okçular</div></div>
+    <div class="kart"><img src="https://cdn.statsroyale.com/images/cards/full/26000016.png"><div class="kart-isim">Cadı</div></div>
 </div>
-
-<footer style="padding: 40px; color: #555;">© 2026 Burak - Tüm Kart Arşivi Yükleniyor...</footer>
-
+<footer>© 2026 Burak - Tüm Kart Arşivi Yükleniyor...</footer>
 </body>
 </html>
