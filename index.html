@@ -3,98 +3,68 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Burak'ın Royale Dünyası</title>
+    <title>Burak'ın Dev Royale Arşivi</title>
     <style>
-        :root { 
-            --sari: #fdb912; --kirmizi: #a90432; --koyu: #121212; 
-            --evrim: #c300ff; --kahraman: #ffcc00; 
-        }
-        body { background-color: var(--koyu); color: white; font-family: 'Arial', sans-serif; text-align: center; margin: 0; }
-        header { background: linear-gradient(135deg, var(--kirmizi), var(--sari)); padding: 40px 20px; box-shadow: 0 4px 20px rgba(0,0,0,0.8); }
+        :root { --sari: #fdb912; --kirmizi: #a90432; --koyu: #0f0f0f; --evrim: #c300ff; --sampiyon: #ffcc00; }
+        body { background-color: var(--koyu); color: white; font-family: sans-serif; text-align: center; margin: 0; }
+        header { background: linear-gradient(135deg, var(--kirmizi), var(--sari)); padding: 30px; border-bottom: 5px solid white; }
         
-        .container { padding: 30px; display: flex; flex-wrap: wrap; justify-content: center; gap: 20px; }
+        .bolum-baslik { color: var(--sari); margin-top: 40px; text-transform: uppercase; font-size: 1.5em; border-bottom: 2px solid var(--sari); display: inline-block; padding: 0 20px; }
         
-        /* Kart Tasarımı */
+        .kart-kutusu { padding: 20px; display: flex; flex-wrap: wrap; justify-content: center; gap: 15px; }
+        
         .kart { 
-            background: #1e1e1e; border-radius: 15px; padding: 15px; 
-            width: 220px; border: 2px solid #333; transition: 0.3s;
-            position: relative; overflow: hidden;
+            background: #1e1e1e; border-radius: 10px; padding: 10px; 
+            width: 140px; border: 1px solid #333; transition: 0.2s;
         }
-        .kart:hover { transform: translateY(-10px); border-color: var(--sari); }
-        
-        /* Resim Ayarı */
-        .kart img { width: 100px; height: auto; margin-bottom: 10px; }
-        
-        /* Özel Kart Tipleri */
-        .evrim-kart { border: 3px solid var(--evrim) !important; box-shadow: 0 0 15px var(--evrim); }
-        .kahraman-kart { border: 3px solid var(--kahraman) !important; box-shadow: 0 0 15px var(--kahraman); }
-        
-        .type-label { 
-            font-size: 0.7em; font-weight: bold; text-transform: uppercase;
-            padding: 3px 8px; border-radius: 5px; margin-bottom: 5px; display: inline-block;
-        }
-        .evrim-bg { background: var(--evrim); }
-        .kahraman-bg { background: var(--kahraman); color: black; }
+        .kart:hover { transform: scale(1.1); z-index: 5; border-color: white; }
+        .kart img { width: 100%; border-radius: 5px; }
+        .kart-isim { font-size: 0.9em; margin-top: 8px; font-weight: bold; }
 
-        h2 { color: var(--sari); margin-top: 50px; text-transform: uppercase; border-bottom: 2px solid var(--sari); display: inline-block; padding: 0 20px; }
+        /* Özel Kart Efektleri */
+        .evrim { border: 2px solid var(--evrim) !important; box-shadow: 0 0 10px var(--evrim); }
+        .sampiyon { border: 2px solid var(--sampiyon) !important; box-shadow: 0 0 10px var(--sampiyon); }
+        
+        .emoji-bar { font-size: 1.5em; margin: 10px 0; }
     </style>
 </head>
 <body>
 
 <header>
-    <h1>BURAK'IN ROYALE DÜNYASI 👑</h1>
-    <p>Kart Koleksiyonu & Strateji Merkezi</p>
+    <h1>BURAK'IN DEV KART ARŞİVİ 👑</h1>
+    <div class="emoji-bar">⚔️ 🛡️ 💎 💣 🏹 ⚡ 🐉 💀</div>
 </header>
 
-<h2>EVRİMLİ KARTLAR 💜</h2>
-<div class="container">
-    <div class="kart evrim-kart">
-        <span class="type-label evrim-bg">EVRİM</span>
-        <br><img src="https://statsroyale.com/images/cards/full/16000004.png" alt="Sövalye">
-        <h3>Şövalye ⚔️</h3>
-        <p>Gelişmiş kalkanıyla hasar almaz!</p>
-    </div>
-    <div class="kart evrim-kart">
-        <span class="type-label evrim-bg">EVRİM</span>
-        <br><img src="https://statsroyale.com/images/cards/full/26000000.png" alt="Bomber">
-        <h3>Bombacı 💣</h3>
-        <p>Bombaları artık iki kez sekiyor!</p>
-    </div>
+<h2 class="bolum-baslik">🏆 ŞAMPİYONLAR</h2>
+<div class="kart-kutusu">
+    <div class="kart sampiyon"><img src="https://statsroyale.com/images/cards/full/26000085.png"><div class="kart-isim">Küçük Prens</div></div>
+    <div class="kart sampiyon"><img src="https://statsroyale.com/images/cards/full/26000069.png"><div class="kart-isim">İskelet Kral</div></div>
+    <div class="kart sampiyon"><img src="https://statsroyale.com/images/cards/full/26000072.png"><div class="kart-isim">Okçu Kraliçe</div></div>
+    <div class="kart sampiyon"><img src="https://statsroyale.com/images/cards/full/26000074.png"><div class="kart-isim">Altın Şövalye</div></div>
+    <div class="kart sampiyon"><img src="https://statsroyale.com/images/cards/full/26000077.png"><div class="kart-isim">Keşiş</div></div>
 </div>
 
-<h2>KAHRAMANLAR ✨</h2>
-<div class="container">
-    <div class="kart kahraman-kart">
-        <span class="type-label kahraman-bg">ŞAMPİYON</span>
-        <br><img src="https://statsroyale.com/images/cards/full/26000085.png" alt="Little Prince">
-        <h3>Küçük Prens 🏹</h3>
-        <p>"Koru Beni!" yeteneğiyle devasa korumasını çağırır.</p>
-    </div>
-    <div class="kart kahraman-kart">
-        <span class="type-label kahraman-bg">ŞAMPİYON</span>
-        <br><img src="https://statsroyale.com/images/cards/full/26000077.png" alt="Archer Queen">
-        <h3>Okçu Kraliçe 👑</h3>
-        <p>Görünmez olup rakiplerini eritir!</p>
-    </div>
+<h2 class="bolum-baslik">💜 EVRİMLİ KARTLAR</h2>
+<div class="kart-kutusu">
+    <div class="kart evrim"><img src="https://statsroyale.com/images/cards/full/26000000.png"><div class="kart-isim">E. Şövalye</div></div>
+    <div class="kart evrim"><img src="https://statsroyale.com/images/cards/full/26000002.png"><div class="kart-isim">E. Okçular</div></div>
+    <div class="kart evrim"><img src="https://statsroyale.com/images/cards/full/26000010.png"><div class="kart-isim">E. İskeletler</div></div>
+    <div class="kart evrim"><img src="https://statsroyale.com/images/cards/full/26000011.png"><div class="kart-isim">E. Dev Krallar</div></div>
 </div>
 
-<h2>FAVORİLERİM 💪</h2>
-<div class="container">
-    <div class="kart">
-        <img src="https://statsroyale.com/images/cards/full/26000055.png" alt="Mega Knight">
-        <h3>Mega Şövalye 🛡️</h3>
-        <p>7 İksirlik devasa bir savunma gücü!</p>
-    </div>
-    <div class="kart">
-        <img src="https://statsroyale.com/images/cards/full/26000067.png" alt="Elixir Golem">
-        <h3>İksir Golemi 💧</h3>
-        <p>3 İksire devasa bir tank.</p>
-    </div>
+<h2 class="bolum-baslik">🔥 DİĞER FAVORİ KARTLAR</h2>
+<div class="kart-kutusu">
+    <div class="kart"><img src="https://statsroyale.com/images/cards/full/26000055.png"><div class="kart-isim">Mega Şövalye</div></div>
+    <div class="kart"><img src="https://statsroyale.com/images/cards/full/26000067.png"><div class="kart-isim">İksir Golemi</div></div>
+    <div class="kart"><img src="https://statsroyale.com/images/cards/full/26000014.png"><div class="kart-isim">P.E.K.K.A</div></div>
+    <div class="kart"><img src="https://statsroyale.com/images/cards/full/26000049.png"><div class="kart-isim">Haydut</div></div>
+    <div class="kart"><img src="https://statsroyale.com/images/cards/full/26000032.png"><div class="kart-isim">Elektro Büyücü</div></div>
+    <div class="kart"><img src="https://statsroyale.com/images/cards/full/26000015.png"><div class="kart-isim">Minyon Sürüsü</div></div>
+    <div class="kart"><img src="https://statsroyale.com/images/cards/full/26000006.png"><div class="kart-isim">Dev</div></div>
+    <div class="kart"><img src="https://statsroyale.com/images/cards/full/28000000.png"><div class="kart-isim">Alev Topu</div></div>
 </div>
 
-<div class="footer" style="margin: 50px 0; color: #666;">
-    <p>© 2026 Burak - Tüm Kartlar ve Emojiler Eklendi!</p>
-</div>
+<footer style="padding: 40px; color: #555;">© 2026 Burak - Tüm Kart Arşivi Yükleniyor...</footer>
 
 </body>
 </html>
