@@ -5,39 +5,61 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Burak'ın Dijital Dünyası</title>
     <style>
-        :root { --sari: #fdb912; --kirmizi: #a90432; --koyu: #121212; }
+        :root { --sari: #fdb912; --kirmizi: #a90432; --koyu: #121212; --iksir: #ff00ff; --zırh: #4a4a4a; }
         body { background-color: var(--koyu); color: white; font-family: sans-serif; text-align: center; margin: 0; }
-        header { background: linear-gradient(135deg, var(--kirmizi), var(--sari)); padding: 50px 20px; }
+        header { background: linear-gradient(135deg, var(--kirmizi), var(--sari)); padding: 40px 20px; box-shadow: 0 4px 15px rgba(0,0,0,0.5); }
         h1 { margin: 0; font-size: 2.5em; letter-spacing: 2px; }
-        .container { padding: 40px 20px; }
-        .proje-kart { 
-            background: #1e1e1e; border: 2px solid var(--sari); border-radius: 15px; 
-            padding: 25px; max-width: 500px; margin: 20px auto;
+        .container { padding: 30px 10px; display: flex; flex-wrap: wrap; justify-content: center; gap: 20px; }
+        
+        /* Kart Tasarımı */
+        .kart { 
+            background: #1e1e1e; border-radius: 15px; padding: 20px; 
+            width: 280px; border-bottom: 5px solid var(--sari);
+            transition: 0.3s;
         }
-        button { 
-            background-color: var(--kirmizi); color: white; border: none; 
-            padding: 12px 25px; border-radius: 25px; font-weight: bold; cursor: pointer;
+        .kart:hover { transform: scale(1.05); }
+        
+        .iksir-golem { border-top: 5px solid var(--iksir); }
+        .mega-knight { border-top: 5px solid var(--zırh); }
+        
+        .kart h3 { margin-top: 0; color: var(--sari); }
+        .kart p { font-size: 0.9em; color: #ccc; min-height: 50px; }
+        
+        .badge { 
+            display: inline-block; padding: 5px 12px; border-radius: 10px; 
+            font-weight: bold; font-size: 0.8em; margin-bottom: 10px;
         }
-        .footer { margin-top: 50px; color: #666; font-size: 0.8em; }
+        .iksir-bg { background: var(--iksir); color: white; }
+        .zırh-bg { background: var(--zırh); color: white; }
+
+        .footer { margin-top: 50px; color: #666; font-size: 0.8em; padding-bottom: 20px; }
     </style>
 </head>
 <body>
 
 <header>
     <h1>BURAK'IN DÜNYASI</h1>
-    <p>Geleceğin Yazılım Mimarı & Oyun Geliştiricisi</p>
+    <p>Yazılım Geliştirici & Clash Royale Ustası</p>
 </header>
 
 <div class="container">
-    <div class="proje-kart">
-        <h3>Clash Royale: Pro Edition</h3>
-        <p>Python ve Pydroid kullanarak geliştirdiğim strateji oyunu.</p>
-        <button onclick="alert('Kodlar GitHub depomda yüklü!')">Projeyi Gör</button>
+    <div class="kart iksir-golem">
+        <div class="badge iksir-bg">3 İksir</div>
+        <h3>İksir Golemi</h3>
+        <p>Parçalandığında rakibe iksir veren ama durdurulması çok zor olan devasa bir güç!</p>
     </div>
 
-    <div class="proje-kart">
-        <h3>Hakkımda</h3>
-        <p>Merhaba! Ben Burak. Python ile oyunlar yapmayı ve web teknolojilerini keşfetmeyi seviyorum.</p>
+    <div class="kart mega-knight">
+        <div class="badge zırh-bg">7 İksir</div>
+        <h3>Mega Knight</h3>
+        <h3>Mega Şövalye</h3>
+        <p>Gökten bir meteor gibi iner ve rakiplerini zıplayarak ezer geçer. Tam bir savunma canavarı!</p>
+    </div>
+
+    <div class="kart" style="border-top: 5px solid var(--kirmizi);">
+        <div class="badge" style="background: var(--kirmizi);">Python</div>
+        <h3>Oyun Projelerim</h3>
+        <p>Kendi yazdığım strateji ve savaş motoru projelerimi burada topluyorum.</p>
     </div>
 </div>
 
