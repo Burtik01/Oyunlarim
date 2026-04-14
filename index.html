@@ -3,68 +3,97 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Burak'ın Dijital Dünyası</title>
+    <title>Burak'ın Royale Dünyası</title>
     <style>
-        :root { --sari: #fdb912; --kirmizi: #a90432; --koyu: #121212; --iksir: #ff00ff; --zırh: #4a4a4a; }
-        body { background-color: var(--koyu); color: white; font-family: sans-serif; text-align: center; margin: 0; }
-        header { background: linear-gradient(135deg, var(--kirmizi), var(--sari)); padding: 40px 20px; box-shadow: 0 4px 15px rgba(0,0,0,0.5); }
-        h1 { margin: 0; font-size: 2.5em; letter-spacing: 2px; }
-        .container { padding: 30px 10px; display: flex; flex-wrap: wrap; justify-content: center; gap: 20px; }
+        :root { 
+            --sari: #fdb912; --kirmizi: #a90432; --koyu: #121212; 
+            --evrim: #c300ff; --kahraman: #ffcc00; 
+        }
+        body { background-color: var(--koyu); color: white; font-family: 'Arial', sans-serif; text-align: center; margin: 0; }
+        header { background: linear-gradient(135deg, var(--kirmizi), var(--sari)); padding: 40px 20px; box-shadow: 0 4px 20px rgba(0,0,0,0.8); }
+        
+        .container { padding: 30px; display: flex; flex-wrap: wrap; justify-content: center; gap: 20px; }
         
         /* Kart Tasarımı */
         .kart { 
-            background: #1e1e1e; border-radius: 15px; padding: 20px; 
-            width: 280px; border-bottom: 5px solid var(--sari);
-            transition: 0.3s;
+            background: #1e1e1e; border-radius: 15px; padding: 15px; 
+            width: 220px; border: 2px solid #333; transition: 0.3s;
+            position: relative; overflow: hidden;
         }
-        .kart:hover { transform: scale(1.05); }
+        .kart:hover { transform: translateY(-10px); border-color: var(--sari); }
         
-        .iksir-golem { border-top: 5px solid var(--iksir); }
-        .mega-knight { border-top: 5px solid var(--zırh); }
+        /* Resim Ayarı */
+        .kart img { width: 100px; height: auto; margin-bottom: 10px; }
         
-        .kart h3 { margin-top: 0; color: var(--sari); }
-        .kart p { font-size: 0.9em; color: #ccc; min-height: 50px; }
+        /* Özel Kart Tipleri */
+        .evrim-kart { border: 3px solid var(--evrim) !important; box-shadow: 0 0 15px var(--evrim); }
+        .kahraman-kart { border: 3px solid var(--kahraman) !important; box-shadow: 0 0 15px var(--kahraman); }
         
-        .badge { 
-            display: inline-block; padding: 5px 12px; border-radius: 10px; 
-            font-weight: bold; font-size: 0.8em; margin-bottom: 10px;
+        .type-label { 
+            font-size: 0.7em; font-weight: bold; text-transform: uppercase;
+            padding: 3px 8px; border-radius: 5px; margin-bottom: 5px; display: inline-block;
         }
-        .iksir-bg { background: var(--iksir); color: white; }
-        .zırh-bg { background: var(--zırh); color: white; }
+        .evrim-bg { background: var(--evrim); }
+        .kahraman-bg { background: var(--kahraman); color: black; }
 
-        .footer { margin-top: 50px; color: #666; font-size: 0.8em; padding-bottom: 20px; }
+        h2 { color: var(--sari); margin-top: 50px; text-transform: uppercase; border-bottom: 2px solid var(--sari); display: inline-block; padding: 0 20px; }
     </style>
 </head>
 <body>
 
 <header>
-    <h1>BURAK'IN DÜNYASI</h1>
-    <p>Yazılım Geliştirici & Clash Royale Ustası</p>
+    <h1>BURAK'IN ROYALE DÜNYASI 👑</h1>
+    <p>Kart Koleksiyonu & Strateji Merkezi</p>
 </header>
 
+<h2>EVRİMLİ KARTLAR 💜</h2>
 <div class="container">
-    <div class="kart iksir-golem">
-        <div class="badge iksir-bg">3 İksir</div>
-        <h3>İksir Golemi</h3>
-        <p>Parçalandığında rakibe iksir veren ama durdurulması çok zor olan devasa bir güç!</p>
+    <div class="kart evrim-kart">
+        <span class="type-label evrim-bg">EVRİM</span>
+        <br><img src="https://statsroyale.com/images/cards/full/16000004.png" alt="Sövalye">
+        <h3>Şövalye ⚔️</h3>
+        <p>Gelişmiş kalkanıyla hasar almaz!</p>
     </div>
-
-    <div class="kart mega-knight">
-        <div class="badge zırh-bg">7 İksir</div>
-        <h3>Mega Knight</h3>
-        <h3>Mega Şövalye</h3>
-        <p>Gökten bir meteor gibi iner ve rakiplerini zıplayarak ezer geçer. Tam bir savunma canavarı!</p>
-    </div>
-
-    <div class="kart" style="border-top: 5px solid var(--kirmizi);">
-        <div class="badge" style="background: var(--kirmizi);">Python</div>
-        <h3>Oyun Projelerim</h3>
-        <p>Kendi yazdığım strateji ve savaş motoru projelerimi burada topluyorum.</p>
+    <div class="kart evrim-kart">
+        <span class="type-label evrim-bg">EVRİM</span>
+        <br><img src="https://statsroyale.com/images/cards/full/26000000.png" alt="Bomber">
+        <h3>Bombacı 💣</h3>
+        <p>Bombaları artık iki kez sekiyor!</p>
     </div>
 </div>
 
-<div class="footer">
-    <p>© 2026 Burak - Tüm Hakları Saklıdır.</p>
+<h2>KAHRAMANLAR ✨</h2>
+<div class="container">
+    <div class="kart kahraman-kart">
+        <span class="type-label kahraman-bg">ŞAMPİYON</span>
+        <br><img src="https://statsroyale.com/images/cards/full/26000085.png" alt="Little Prince">
+        <h3>Küçük Prens 🏹</h3>
+        <p>"Koru Beni!" yeteneğiyle devasa korumasını çağırır.</p>
+    </div>
+    <div class="kart kahraman-kart">
+        <span class="type-label kahraman-bg">ŞAMPİYON</span>
+        <br><img src="https://statsroyale.com/images/cards/full/26000077.png" alt="Archer Queen">
+        <h3>Okçu Kraliçe 👑</h3>
+        <p>Görünmez olup rakiplerini eritir!</p>
+    </div>
+</div>
+
+<h2>FAVORİLERİM 💪</h2>
+<div class="container">
+    <div class="kart">
+        <img src="https://statsroyale.com/images/cards/full/26000055.png" alt="Mega Knight">
+        <h3>Mega Şövalye 🛡️</h3>
+        <p>7 İksirlik devasa bir savunma gücü!</p>
+    </div>
+    <div class="kart">
+        <img src="https://statsroyale.com/images/cards/full/26000067.png" alt="Elixir Golem">
+        <h3>İksir Golemi 💧</h3>
+        <p>3 İksire devasa bir tank.</p>
+    </div>
+</div>
+
+<div class="footer" style="margin: 50px 0; color: #666;">
+    <p>© 2026 Burak - Tüm Kartlar ve Emojiler Eklendi!</p>
 </div>
 
 </body>
