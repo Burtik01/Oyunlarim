@@ -2,102 +2,131 @@
 <html lang="tr">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Burak'ın Dev Royale Arşivi</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>Burak'ın Web İmparatorluğu</title>
     <style>
-        :root { --sari: #fdb912; --kirmizi: #a90432; --koyu: #080808; --evrim: #c300ff; --sampiyon: #ffcc00; --efsane: #00d2ff; }
-        body { background-color: var(--koyu); color: white; font-family: 'Segoe UI', sans-serif; text-align: center; margin: 0; padding-bottom: 50px; }
-        header { background: linear-gradient(135deg, var(--kirmizi), var(--sari)); padding: 25px; border-bottom: 4px solid #fff; position: sticky; top: 0; z-index: 100; box-shadow: 0 5px 15px rgba(0,0,0,0.8); }
-        .section-title { color: var(--sari); margin-top: 40px; text-transform: uppercase; font-size: 1.3em; border-bottom: 3px solid var(--sari); display: inline-block; padding: 5px 20px; letter-spacing: 1px; }
-        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(90px, 1fr)); gap: 10px; padding: 15px; max-width: 1200px; margin: 0 auto; }
-        .card { background: #151515; border-radius: 10px; padding: 8px; border: 1px solid #222; transition: 0.2s; position: relative; }
-        .card:hover { transform: scale(1.15); z-index: 10; border-color: #fff; box-shadow: 0 0 20px rgba(255,255,255,0.3); }
-        .card img { width: 100%; height: auto; border-radius: 5px; filter: drop-shadow(0 2px 4px black); }
-        .card-name { font-size: 0.7em; margin-top: 8px; font-weight: bold; color: #fff; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-        
-        /* Özel Efektler */
-        .hero { border: 2px solid var(--sampiyon) !important; background: linear-gradient(to bottom, #2a2200, #151515); }
-        .evo { border: 2px solid var(--evrim) !important; background: linear-gradient(to bottom, #22002a, #151515); }
-        .legend { border: 2px solid var(--efsane) !important; }
+        body { margin: 0; background: #0a0a0c; color: white; font-family: 'Segoe UI', sans-serif; overflow: hidden; touch-action: none; }
+        canvas { display: block; background: #15151a; margin: 0 auto; box-shadow: 0 0 20px rgba(0,0,0,0.5); }
+        #ui { position: absolute; top: 10px; width: 100%; text-align: center; pointer-events: none; }
+        .score-box { background: rgba(0,0,0,0.7); padding: 10px 20px; border-radius: 20px; border: 2px solid #fdb912; display: inline-block; font-weight: bold; }
     </style>
 </head>
 <body>
 
-<header>
-    <h1>BURAK'IN EFSANEVİ ARŞİVİ 👑</h1>
-    <p>60+ Kart | Tüm Karakterler Yayında!</p>
-</header>
-
-<h2 class="section-title">🏆 ŞAMPİYONLAR</h2>
-<div class="grid">
-    <div class="card hero"><img src="https://raw.githubusercontent.com/RoyaleAPI/cr-api-assets/master/cards/little-prince.png"><div class="card-name">Küçük Prens</div></div>
-    <div class="card hero"><img src="https://raw.githubusercontent.com/RoyaleAPI/cr-api-assets/master/cards/skeleton-king.png"><div class="card-name">İskelet Kral</div></div>
-    <div class="card hero"><img src="https://raw.githubusercontent.com/RoyaleAPI/cr-api-assets/master/cards/archer-queen.png"><div class="card-name">Okçu Kraliçe</div></div>
-    <div class="card hero"><img src="https://raw.githubusercontent.com/RoyaleAPI/cr-api-assets/master/cards/mighty-miner.png"><div class="card-name">M. Madenci</div></div>
-    <div class="card hero"><img src="https://raw.githubusercontent.com/RoyaleAPI/cr-api-assets/master/cards/monk.png"><div class="card-name">Keşiş</div></div>
-    <div class="card hero"><img src="https://raw.githubusercontent.com/RoyaleAPI/cr-api-assets/master/cards/golden-knight.png"><div class="card-name">A. Şövalye</div></div>
+<div id="ui">
+    <div class="score-box">
+        <span style="color: #fdb912;">GS: <span id="p-score">0</span></span> | 
+        <span style="color: #00d2ff;">BOT: <span id="e-score">0</span></span>
+    </div>
 </div>
 
-<h2 class="section-title">💜 EVRİMLER</h2>
-<div class="grid">
-    <div class="card evo"><img src="https://raw.githubusercontent.com/RoyaleAPI/cr-api-assets/master/cards/knight-evo.png"><div class="card-name">E. Şövalye</div></div>
-    <div class="card evo"><img src="https://raw.githubusercontent.com/RoyaleAPI/cr-api-assets/master/cards/skeletons-evo.png"><div class="card-name">E. İskeletler</div></div>
-    <div class="card evo"><img src="https://raw.githubusercontent.com/RoyaleAPI/cr-api-assets/master/cards/barbarians-evo.png"><div class="card-name">E. Barbarlar</div></div>
-    <div class="card evo"><img src="https://raw.githubusercontent.com/RoyaleAPI/cr-api-assets/master/cards/royal-giant-evo.png"><div class="card-name">E. K. Devi</div></div>
-    <div class="card evo"><img src="https://raw.githubusercontent.com/RoyaleAPI/cr-api-assets/master/cards/firecracker-evo.png"><div class="card-name">E. Fiçifis</div></div>
-    <div class="card evo"><img src="https://raw.githubusercontent.com/RoyaleAPI/cr-api-assets/master/cards/bats-evo.png"><div class="card-name">E. Yarasalar</div></div>
-    <div class="card evo"><img src="https://raw.githubusercontent.com/RoyaleAPI/cr-api-assets/master/cards/bomber-evo.png"><div class="card-name">E. Bombacı</div></div>
-    <div class="card evo"><img src="https://raw.githubusercontent.com/RoyaleAPI/cr-api-assets/master/cards/valkyrie-evo.png"><div class="card-name">E. Valkür</div></div>
-</div>
+<canvas id="gameCanvas"></canvas>
 
-<h2 class="section-title">💎 EFSANEVİ KARTLAR</h2>
-<div class="grid">
-    <div class="card legend"><img src="https://raw.githubusercontent.com/RoyaleAPI/cr-api-assets/master/cards/mega-knight.png"><div class="card-name">Mega Şövalye</div></div>
-    <div class="card legend"><img src="https://raw.githubusercontent.com/RoyaleAPI/cr-api-assets/master/cards/electro-wizard.png"><div class="card-name">E. Büyücü</div></div>
-    <div class="card legend"><img src="https://raw.githubusercontent.com/RoyaleAPI/cr-api-assets/master/cards/bandit.png"><div class="card-name">Haydut</div></div>
-    <div class="card legend"><img src="https://raw.githubusercontent.com/RoyaleAPI/cr-api-assets/master/cards/log.png"><div class="card-name">Tomruk</div></div>
-    <div class="card legend"><img src="https://raw.githubusercontent.com/RoyaleAPI/cr-api-assets/master/cards/inferno-dragon.png"><div class="card-name">C. Ejderi</div></div>
-    <div class="card legend"><img src="https://raw.githubusercontent.com/RoyaleAPI/cr-api-assets/master/cards/magic-archer.png"><div class="card-name">S. Okçu</div></div>
-    <div class="card legend"><img src="https://raw.githubusercontent.com/RoyaleAPI/cr-api-assets/master/cards/graveyard.png"><div class="card-name">Mezarlık</div></div>
-    <div class="card legend"><img src="https://raw.githubusercontent.com/RoyaleAPI/cr-api-assets/master/cards/night-witch.png"><div class="card-name">Gece Cadısı</div></div>
-    <div class="card legend"><img src="https://raw.githubusercontent.com/RoyaleAPI/cr-api-assets/master/cards/ice-wizard.png"><div class="card-name">Buz Büyücüsü</div></div>
-    <div class="card legend"><img src="https://raw.githubusercontent.com/RoyaleAPI/cr-api-assets/master/cards/miner.png"><div class="card-name">Madenci</div></div>
-</div>
+<script>
+    const canvas = document.getElementById('gameCanvas');
+    const ctx = canvas.getContext('2d');
+    const pScoreTxt = document.getElementById('p-score');
+    const eScoreTxt = document.getElementById('e-score');
 
-<h2 class="section-title">🛡️ DİĞER KARTLAR</h2>
-<div class="grid">
-    <div class="card"><img src="https://raw.githubusercontent.com/RoyaleAPI/cr-api-assets/master/cards/pekka.png"><div class="card-name">P.E.K.K.A</div></div>
-    <div class="card"><img src="https://raw.githubusercontent.com/RoyaleAPI/cr-api-assets/master/cards/elixir-golem.png"><div class="card-name">İksir Golemi</div></div>
-    <div class="card"><img src="https://raw.githubusercontent.com/RoyaleAPI/cr-api-assets/master/cards/wizard.png"><div class="card-name">Büyücü</div></div>
-    <div class="card"><img src="https://raw.githubusercontent.com/RoyaleAPI/cr-api-assets/master/cards/hog-rider.png"><div class="card-name">Binici</div></div>
-    <div class="card"><img src="https://raw.githubusercontent.com/RoyaleAPI/cr-api-assets/master/cards/valkyrie.png"><div class="card-name">Valkür</div></div>
-    <div class="card"><img src="https://raw.githubusercontent.com/RoyaleAPI/cr-api-assets/master/cards/mini-pekka.png"><div class="card-name">Mini P.E.K.K.A</div></div>
-    <div class="card"><img src="https://raw.githubusercontent.com/RoyaleAPI/cr-api-assets/master/cards/baby-dragon.png"><div class="card-name">Yavru Ejder</div></div>
-    <div class="card"><img src="https://raw.githubusercontent.com/RoyaleAPI/cr-api-assets/master/cards/skeleton-army.png"><div class="card-name">İskelet Ordusu</div></div>
-    <div class="card"><img src="https://raw.githubusercontent.com/RoyaleAPI/cr-api-assets/master/cards/goblin-barrel.png"><div class="card-name">G. Fıçısı</div></div>
-    <div class="card"><img src="https://raw.githubusercontent.com/RoyaleAPI/cr-api-assets/master/cards/prince.png"><div class="card-name">Prens</div></div>
-    <div class="card"><img src="https://raw.githubusercontent.com/RoyaleAPI/cr-api-assets/master/cards/dark-prince.png"><div class="card-name">Kara Prens</div></div>
-    <div class="card"><img src="https://raw.githubusercontent.com/RoyaleAPI/cr-api-assets/master/cards/balloon.png"><div class="card-name">Balon</div></div>
-    <div class="card"><img src="https://raw.githubusercontent.com/RoyaleAPI/cr-api-assets/master/cards/musketeer.png"><div class="card-name">Silahşör</div></div>
-    <div class="card"><img src="https://raw.githubusercontent.com/RoyaleAPI/cr-api-assets/master/cards/giant.png"><div class="card-name">Dev</div></div>
-    <div class="card"><img src="https://raw.githubusercontent.com/RoyaleAPI/cr-api-assets/master/cards/golem.png"><div class="card-name">Golem</div></div>
-    <div class="card"><img src="https://raw.githubusercontent.com/RoyaleAPI/cr-api-assets/master/cards/witch.png"><div class="card-name">Cadı</div></div>
-    <div class="card"><img src="https://raw.githubusercontent.com/RoyaleAPI/cr-api-assets/master/cards/bats.png"><div class="card-name">Yarasalar</div></div>
-    <div class="card"><img src="https://raw.githubusercontent.com/RoyaleAPI/cr-api-assets/master/cards/firecracker.png"><div class="card-name">Fiçifis</div></div>
-    <div class="card"><img src="https://raw.githubusercontent.com/RoyaleAPI/cr-api-assets/master/cards/arrows.png"><div class="card-name">Oklar</div></div>
-    <div class="card"><img src="https://raw.githubusercontent.com/RoyaleAPI/cr-api-assets/master/cards/fireball.png"><div class="card-name">Alev Topu</div></div>
-    <div class="card"><img src="https://raw.githubusercontent.com/RoyaleAPI/cr-api-assets/master/cards/zap.png"><div class="card-name">Çarpma</div></div>
-    <div class="card"><img src="https://raw.githubusercontent.com/RoyaleAPI/cr-api-assets/master/cards/giant-skeleton.png"><div class="card-name">Dev İskelet</div></div>
-    <div class="card"><img src="https://raw.githubusercontent.com/RoyaleAPI/cr-api-assets/master/cards/electro-giant.png"><div class="card-name">E. Dev</div></div>
-    <div class="card"><img src="https://raw.githubusercontent.com/RoyaleAPI/cr-api-assets/master/cards/minions.png"><div class="card-name">Minyonlar</div></div>
-    <div class="card"><img src="https://raw.githubusercontent.com/RoyaleAPI/cr-api-assets/master/cards/guards.png"><div class="card-name">Korumalar</div></div>
-    <div class="card"><img src="https://raw.githubusercontent.com/RoyaleAPI/cr-api-assets/master/cards/hunter.png"><div class="card-name">Avcı</div></div>
-    <div class="card"><img src="https://raw.githubusercontent.com/RoyaleAPI/cr-api-assets/master/cards/bowler.png"><div class="card-name">Atıcı</div></div>
-    <div class="card"><img src="https://raw.githubusercontent.com/RoyaleAPI/cr-api-assets/master/cards/executioner.png"><div class="card-name">Cellat</div></div>
-    <div class="card"><img src="https://raw.githubusercontent.com/RoyaleAPI/cr-api-assets/master/cards/cannon-cart.png"><div class="card-name">Top Arabası</div></div>
-</div>
+    // Ayarlar
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    const gridCount = 25;
+    const cellSize = Math.min(canvas.width, canvas.height) / gridCount;
+    const offsetX = (canvas.width - (gridCount * cellSize)) / 2;
+    const offsetY = (canvas.height - (gridCount * cellSize)) / 2;
 
-<footer style="margin-top: 50px; color: #555;">© 2026 Burak - Tüm Arşiv Tamamlandı!</footer>
+    // Harita: 0: Boş, 1: Burak(GS), 2: Bot
+    let grid = [];
+    for(let y=0; y<gridCount; y++) {
+        grid[y] = [];
+        for(let x=0; x<gridCount; x++) {
+            grid[y][x] = { owner: 0, power: 0, isWater: Math.random() < 0.1 };
+        }
+    }
 
+    // Başlangıçlar
+    grid[2][2] = { owner: 1, power: 100, isWater: false };
+    grid[gridCount-3][gridCount-3] = { owner: 2, power: 100, isWater: false };
+
+    function draw() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        let pTotal = 0, eTotal = 0;
+
+        for(let y=0; y<gridCount; y++) {
+            for(let x=0; x<gridCount; x++) {
+                const cell = grid[y][x];
+                const px = offsetX + x * cellSize;
+                const py = offsetY + y * cellSize;
+
+                if(cell.isWater) ctx.fillStyle = '#1e2d3c';
+                else if(cell.owner === 1) { ctx.fillStyle = '#a90432'; pTotal += cell.power; }
+                else if(cell.owner === 2) { ctx.fillStyle = '#0074e4'; eTotal += cell.power; }
+                else ctx.fillStyle = '#2a2a2e';
+
+                ctx.fillRect(px, py, cellSize - 1, cellSize - 1);
+                
+                // GS Sarısı Çerçeve (Sadece oyuncu için)
+                if(cell.owner === 1) {
+                    ctx.strokeStyle = '#fdb912';
+                    ctx.lineWidth = 1;
+                    ctx.strokeRect(px, py, cellSize - 1, cellSize - 1);
+                }
+            }
+        }
+        pScoreTxt.innerText = Math.floor(pTotal);
+        eScoreTxt.innerText = Math.floor(eTotal);
+        requestAnimationFrame(draw);
+    }
+
+    // Saldırı Mekaniği
+    function attack(tx, ty, attacker) {
+        if(grid[ty][tx].isWater) return;
+        
+        let bestNeighbor = null;
+        let maxPower = 0;
+        [[0,1],[0,-1],[1,0],[-1,0]].forEach(([dy, dx]) => {
+            let ny = ty+dy, nx = tx+dx;
+            if(ny>=0 && ny<gridCount && nx>=0 && nx<gridCount) {
+                if(grid[ny][nx].owner === attacker && grid[ny][nx].power > maxPower) {
+                    maxPower = grid[ny][nx].power;
+                    bestNeighbor = grid[ny][nx];
+                }
+            }
+        });
+
+        if(maxPower > 10) {
+            let move = maxPower * 0.7;
+            bestNeighbor.power -= move;
+            if(grid[ty][tx].owner !== attacker) {
+                grid[ty][tx].power -= move;
+                if(grid[ty][tx].power < 0) {
+                    grid[ty][tx].power = Math.abs(grid[ty][tx].power);
+                    grid[ty][tx].owner = attacker;
+                }
+            } else {
+                grid[ty][tx].power += move;
+            }
+        }
+    }
+
+    // Tıklama / Dokunma
+    window.addEventListener('pointerdown', e => {
+        const x = Math.floor((e.clientX - offsetX) / cellSize);
+        const y = Math.floor((e.clientY - offsetY) / cellSize);
+        if(x>=0 && x<gridCount && y>=0 && y<gridCount) attack(x, y, 1);
+    });
+
+    // Ekonomi (Interest) ve Bot
+    setInterval(() => {
+        grid.forEach(row => row.forEach(c => { if(c.owner > 0) c.power = Math.min(c.power * 1.02 + 0.5, 500); }));
+        // Bot Hamlesi
+        let rx = Math.floor(Math.random()*gridCount);
+        let ry = Math.floor(Math.random()*gridCount);
+        attack(rx, ry, 2);
+    }, 500);
+
+    draw();
+</script>
 </body>
 </html>
