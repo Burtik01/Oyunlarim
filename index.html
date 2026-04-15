@@ -3,17 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-    <title>Burak'ın Fetih Dünyası</title>
+    <title>Burak'ın Turbo Fetih Dünyası</title>
     <style>
         body { margin: 0; background: #050508; color: white; font-family: 'Segoe UI', sans-serif; overflow: hidden; touch-action: none; }
-        canvas { display: block; background: #0a0a0f; cursor: crosshair; }
-        #ui { position: absolute; top: 0; left: 0; width: 100%; pointer-events: none; padding: 10px; }
-        .score-box { background: rgba(0,0,0,0.8); padding: 5px 15px; border-radius: 10px; border: 1px solid #fdb912; display: inline-block; font-weight: bold; }
-        
-        #menu { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); background: rgba(10,10,15,0.95); padding: 30px; border-radius: 20px; border: 3px solid #fdb912; text-align: center; box-shadow: 0 0 30px rgba(253,185,18,0.3); }
-        #menu h1 { color: #fdb912; margin-top: 0; font-size: 2em; }
-        .map-btn { background: #a90432; color: #fdb912; border: 2px solid #fdb912; padding: 15px 30px; margin: 10px; font-size: 1.2em; border-radius: 10px; cursor: pointer; transition: 0.2s; font-weight: bold; }
-        .map-btn:hover { background: #fdb912; color: #a90432; transform: scale(1.05); }
+        canvas { display: block; background: #0a0a0f; }
+        #ui { position: absolute; top: 0; left: 0; width: 100%; pointer-events: none; padding: 10px; z-index: 10; }
+        .score-box { background: rgba(0,0,0,0.85); padding: 8px 15px; border-radius: 12px; border: 2px solid #fdb912; display: inline-block; font-size: 1.1em; }
+        #menu { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); background: #111; padding: 30px; border-radius: 20px; border: 4px solid #fdb912; text-align: center; z-index: 100; }
+        .map-btn { background: #a90432; color: #fdb912; border: 2px solid #fdb912; padding: 15px 30px; margin: 10px; font-size: 1.3em; border-radius: 10px; cursor: pointer; font-weight: bold; }
     </style>
 </head>
 <body>
@@ -21,15 +18,14 @@
 <div id="ui">
     <div class="score-box">
         <span style="color: #fdb912;">BURAK (GS) 🦁: <span id="p-score">0</span></span> | 
-        <span style="color: #00d2ff;">BOTLAR: <span id="e-score">0</span></span>
+        <span style="color: #00d2ff;">RAKİPLER: <span id="e-score">0</span></span>
     </div>
 </div>
 
 <div id="menu">
-    <h1>HARİTA SEÇ 🌍</h1>
-    <button class="map-btn" onclick="startGame('dunya')">DÜNYA SAVAŞI</button><br>
-    <button class="map-btn" onclick="startGame('adalar')">ADALAR</button><br>
-    <button class="map-btn" onclick="startGame('klasik')">KLASİK</button>
+    <h1 style="color:#fdb912">TURBO MODU AKTİF! 🚀</h1>
+    <button class="map-btn" onclick="startGame('klasik')">KLASİK SAVAŞ</button><br>
+    <button class="map-btn" onclick="startGame('dunya')">DEV KITA</button>
 </div>
 
 <canvas id="gameCanvas"></canvas>
@@ -41,10 +37,9 @@
     const pScoreTxt = document.getElementById('p-score');
     const eScoreTxt = document.getElementById('e-score');
 
-    // --- AYARLAR ---
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
-    const gridCount = 50; // Devasa Harita (50x50)
+    const gridCount = 40; 
     const cellSize = Math.min(canvas.width, canvas.height) / gridCount;
     const offsetX = (canvas.width - (gridCount * cellSize)) / 2;
     const offsetY = (canvas.height - (gridCount * cellSize)) / 2;
@@ -52,21 +47,11 @@
     let grid = [];
     let gameActive = false;
 
-    // Harita Oluşturma Fonksiyonları
-    const maps = {
-        'klasik': () => Math.random() < 0.05,
-        'adalar': (x, y) => (Math.sin(x*0.3) * Math.cos(y*0.3)) > 0.3,
-        'dunya': (x, y) => {
-            let d = Math.sqrt(Math.pow(x-gridCount/2, 2) + Math.pow(y-gridCount/2, 2));
-            return d > (gridCount * 0.4) || (Math.random() < 0.1); // Merkez kıta, etrafı deniz
-        }
-    };
-
     function startGame(mapType) {
         menu.style.display = 'none';
         gameActive = true;
         initGrid(mapType);
-        draw();
+        requestAnimationFrame(gameLoop);
     }
 
     function initGrid(mapType) {
@@ -74,96 +59,91 @@
         for(let y=0; y<gridCount; y++) {
             grid[y] = [];
             for(let x=0; x<gridCount; x++) {
-                grid[y][x] = { owner: 0, power: 0, isWater: maps[mapType](x, y) };
+                let isWater = false;
+                if(mapType === 'dunya') {
+                    let d = Math.sqrt(Math.pow(x-gridCount/2, 2) + Math.pow(y-gridCount/2, 2));
+                    isWater = d > (gridCount * 0.45);
+                }
+                grid[y][x] = { owner: 0, power: 0, isWater: isWater };
             }
         }
-        // Başlangıçlar
-        grid[5][5] = { owner: 1, power: 200, isWater: false }; // Burak (GS)
-        grid[gridCount-6][gridCount-6] = { owner: 2, power: 200, isWater: false }; // Bot 1
-        grid[gridCount-6][5] = { owner: 3, power: 200, isWater: false }; // Bot 2
+        // Oyuncular ve Botlar (Güçlü Başlangıç)
+        grid[5][5] = { owner: 1, power: 500, isWater: false }; 
+        grid[gridCount-6][gridCount-6] = { owner: 2, power: 500, isWater: false };
+        grid[gridCount-6][5] = { owner: 3, power: 500, isWater: false };
     }
 
-    function draw() {
-        if (!gameActive) return;
+    function handleAction(tx, ty, attackerId) {
+        if(!grid[ty] || !grid[ty][tx] || grid[ty][tx].isWater) return;
+        
+        let bestSource = null, maxPower = 0;
+        // Etrafındaki en güçlü karesini bul
+        [[0,1],[0,-1],[1,0],[-1,0]].forEach(([dy, dx]) => {
+            let ny=ty+dy, nx=tx+dx;
+            if(grid[ny] && grid[ny][nx] && grid[ny][nx].owner === attackerId) {
+                if(grid[ny][nx].power > maxPower) {
+                    maxPower = grid[ny][nx].power;
+                    bestSource = grid[ny][nx];
+                }
+            }
+        });
+
+        if(maxPower > 20) {
+            let sendAmount = maxPower * 0.85; 
+            bestSource.power -= sendAmount;
+            if(grid[ty][tx].owner !== attackerId) {
+                grid[ty][tx].power -= sendAmount;
+                if(grid[ty][tx].power < 0) {
+                    grid[ty][tx].power = Math.abs(grid[ty][tx].power);
+                    grid[ty][tx].owner = attackerId;
+                }
+            } else {
+                grid[ty][tx].power += sendAmount;
+            }
+        }
+    }
+
+    // Tıklama
+    window.addEventListener('pointerdown', e => {
+        const x = Math.floor((e.clientX - offsetX) / cellSize);
+        const y = Math.floor((e.clientY - offsetY) / cellSize);
+        if(gameActive) handleAction(x, y, 1);
+    });
+
+    // Ana Döngü
+    function gameLoop() {
+        if(!gameActive) return;
         ctx.clearRect(0, 0, canvas.width, canvas.height);
         let pTotal = 0, eTotal = 0;
 
         for(let y=0; y<gridCount; y++) {
             for(let x=0; x<gridCount; x++) {
                 const cell = grid[y][x];
-                const px = offsetX + x * cellSize;
-                const py = offsetY + y * cellSize;
-
-                if(cell.isWater) ctx.fillStyle = '#0f141a'; // Koyu Deniz
-                else if(cell.owner === 1) { ctx.fillStyle = '#a90432'; pTotal += cell.power; } // GS Kırmızı
-                else if(cell.owner === 2) { ctx.fillStyle = '#0066cc'; eTotal += cell.power; } // Bot 1
-                else if(cell.owner === 3) { ctx.fillStyle = '#cc00cc'; eTotal += cell.power; } // Bot 2
-                else ctx.fillStyle = '#1a1a20'; // Boş Toprak
-
-                ctx.fillRect(px, py, cellSize - 1, cellSize - 1);
-                
-                // GS Sarısı Çerçeve
-                if(cell.owner === 1) {
-                    ctx.strokeStyle = '#fdb912'; ctx.lineWidth = 0.5;
-                    ctx.strokeRect(px, py, cellSize - 1, cellSize - 1);
+                if(cell.owner > 0) {
+                    // TURBO BÜYÜME: Her kare kendi kendine hızlıca artar
+                    cell.power = Math.min(cell.power * 1.03 + 5, 5000);
+                    if(cell.owner === 1) pTotal += cell.power; else eTotal += cell.power;
                 }
+
+                // Çizim
+                ctx.fillStyle = cell.isWater ? '#0f141a' : (cell.owner === 1 ? '#a90432' : (cell.owner === 2 ? '#0066cc' : (cell.owner === 3 ? '#cc00cc' : '#1a1a20')));
+                ctx.fillRect(offsetX + x * cellSize, offsetY + y * cellSize, cellSize - 1, cellSize - 1);
+                if(cell.owner === 1) { ctx.strokeStyle = '#fdb912'; ctx.strokeRect(offsetX + x * cellSize, offsetY + y * cellSize, cellSize - 1, cellSize - 1); }
             }
         }
-        pScoreTxt.innerText = Math.floor(pTotal);
-        eScoreTxt.innerText = Math.floor(eTotal);
-        requestAnimationFrame(draw);
-    }
-
-    // Saldırı ve Takviye
-    function handleAction(tx, ty, attacker) {
-        if(!gameActive || grid[ty][tx].isWater) return;
         
-        let bestNeighbor = null, maxPower = 0;
-        [[0,1],[0,-1],[1,0],[-1,0]].forEach(([dy, dx]) => {
-            let ny=ty+dy, nx=tx+dx;
-            if(ny>=0 && ny<gridCount && nx>=0 && nx<gridCount) {
-                if(grid[ny][nx].owner === attacker && grid[ny][nx].power > maxPower) {
-                    maxPower = grid[ny][nx].power; bestNeighbor = grid[ny][nx];
-                }
+        // AGRESİF BOTLAR
+        [2, 3].forEach(botId => {
+            for(let i=0; i<3; i++) { // Her döngüde 3 saldırı denemesi
+                let rx = Math.floor(Math.random()*gridCount), ry = Math.floor(Math.random()*gridCount);
+                handleAction(rx, ry, botId);
             }
         });
 
-        if(maxPower > 10) {
-            let move = maxPower * 0.8; // %80 güçle saldır/takviye et
-            bestNeighbor.power -= move;
-            if(grid[ty][tx].owner !== attacker) {
-                grid[ty][tx].power -= move;
-                if(grid[ty][tx].power < 0) {
-                    grid[ty][tx].power = Math.abs(grid[ty][tx].power);
-                    grid[ty][tx].owner = attacker;
-                }
-            } else { // Kendi toprağına tıklandığında takviye
-                grid[ty][tx].power += move;
-            }
-        }
+        pScoreTxt.innerText = Math.floor(pTotal);
+        eScoreTxt.innerText = Math.floor(eTotal);
+        setTimeout(() => requestAnimationFrame(gameLoop), 50); // 50ms hızında yenileme
     }
-
-    // Tıklama / Dokunma
-    window.addEventListener('pointerdown', e => {
-        const x = Math.floor((e.clientX - offsetX) / cellSize);
-        const y = Math.floor((e.clientY - offsetY) / cellSize);
-        if(x>=0 && x<gridCount && y>=0 && y<gridCount) handleAction(x, y, 1);
-    });
-
-    // MEGA HIZLI Ekonomi ve Botlar (Her 100ms)
-    setInterval(() => {
-        if(!gameActive) return;
-        grid.forEach(row => row.forEach(c => { 
-            if(c.owner > 0) c.power = Math.min(c.power * 1.05 + 2, 1000); // %5 Faiz + Sabit Artış
-        }));
-        
-        // Bot Hamleleri (Daha agresif)
-        for(let b=2; b<=3; b++) {
-            let rx = Math.floor(Math.random()*gridCount), ry = Math.floor(Math.random()*gridCount);
-            handleAction(rx, ry, b);
-        }
-    }, 100);
-
 </script>
 </body>
 </html>
