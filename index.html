@@ -3,21 +3,33 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-    <title>Burak'ın Web İmparatorluğu</title>
+    <title>Burak'ın Fetih Dünyası</title>
     <style>
-        body { margin: 0; background: #0a0a0c; color: white; font-family: 'Segoe UI', sans-serif; overflow: hidden; touch-action: none; }
-        canvas { display: block; background: #15151a; margin: 0 auto; box-shadow: 0 0 20px rgba(0,0,0,0.5); }
-        #ui { position: absolute; top: 10px; width: 100%; text-align: center; pointer-events: none; }
-        .score-box { background: rgba(0,0,0,0.7); padding: 10px 20px; border-radius: 20px; border: 2px solid #fdb912; display: inline-block; font-weight: bold; }
+        body { margin: 0; background: #050508; color: white; font-family: 'Segoe UI', sans-serif; overflow: hidden; touch-action: none; }
+        canvas { display: block; background: #0a0a0f; cursor: crosshair; }
+        #ui { position: absolute; top: 0; left: 0; width: 100%; pointer-events: none; padding: 10px; }
+        .score-box { background: rgba(0,0,0,0.8); padding: 5px 15px; border-radius: 10px; border: 1px solid #fdb912; display: inline-block; font-weight: bold; }
+        
+        #menu { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); background: rgba(10,10,15,0.95); padding: 30px; border-radius: 20px; border: 3px solid #fdb912; text-align: center; box-shadow: 0 0 30px rgba(253,185,18,0.3); }
+        #menu h1 { color: #fdb912; margin-top: 0; font-size: 2em; }
+        .map-btn { background: #a90432; color: #fdb912; border: 2px solid #fdb912; padding: 15px 30px; margin: 10px; font-size: 1.2em; border-radius: 10px; cursor: pointer; transition: 0.2s; font-weight: bold; }
+        .map-btn:hover { background: #fdb912; color: #a90432; transform: scale(1.05); }
     </style>
 </head>
 <body>
 
 <div id="ui">
     <div class="score-box">
-        <span style="color: #fdb912;">GS: <span id="p-score">0</span></span> | 
-        <span style="color: #00d2ff;">BOT: <span id="e-score">0</span></span>
+        <span style="color: #fdb912;">BURAK (GS) 🦁: <span id="p-score">0</span></span> | 
+        <span style="color: #00d2ff;">BOTLAR: <span id="e-score">0</span></span>
     </div>
+</div>
+
+<div id="menu">
+    <h1>HARİTA SEÇ 🌍</h1>
+    <button class="map-btn" onclick="startGame('dunya')">DÜNYA SAVAŞI</button><br>
+    <button class="map-btn" onclick="startGame('adalar')">ADALAR</button><br>
+    <button class="map-btn" onclick="startGame('klasik')">KLASİK</button>
 </div>
 
 <canvas id="gameCanvas"></canvas>
@@ -25,31 +37,54 @@
 <script>
     const canvas = document.getElementById('gameCanvas');
     const ctx = canvas.getContext('2d');
+    const menu = document.getElementById('menu');
     const pScoreTxt = document.getElementById('p-score');
     const eScoreTxt = document.getElementById('e-score');
 
-    // Ayarlar
+    // --- AYARLAR ---
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
-    const gridCount = 25;
+    const gridCount = 50; // Devasa Harita (50x50)
     const cellSize = Math.min(canvas.width, canvas.height) / gridCount;
     const offsetX = (canvas.width - (gridCount * cellSize)) / 2;
     const offsetY = (canvas.height - (gridCount * cellSize)) / 2;
 
-    // Harita: 0: Boş, 1: Burak(GS), 2: Bot
     let grid = [];
-    for(let y=0; y<gridCount; y++) {
-        grid[y] = [];
-        for(let x=0; x<gridCount; x++) {
-            grid[y][x] = { owner: 0, power: 0, isWater: Math.random() < 0.1 };
+    let gameActive = false;
+
+    // Harita Oluşturma Fonksiyonları
+    const maps = {
+        'klasik': () => Math.random() < 0.05,
+        'adalar': (x, y) => (Math.sin(x*0.3) * Math.cos(y*0.3)) > 0.3,
+        'dunya': (x, y) => {
+            let d = Math.sqrt(Math.pow(x-gridCount/2, 2) + Math.pow(y-gridCount/2, 2));
+            return d > (gridCount * 0.4) || (Math.random() < 0.1); // Merkez kıta, etrafı deniz
         }
+    };
+
+    function startGame(mapType) {
+        menu.style.display = 'none';
+        gameActive = true;
+        initGrid(mapType);
+        draw();
     }
 
-    // Başlangıçlar
-    grid[2][2] = { owner: 1, power: 100, isWater: false };
-    grid[gridCount-3][gridCount-3] = { owner: 2, power: 100, isWater: false };
+    function initGrid(mapType) {
+        grid = [];
+        for(let y=0; y<gridCount; y++) {
+            grid[y] = [];
+            for(let x=0; x<gridCount; x++) {
+                grid[y][x] = { owner: 0, power: 0, isWater: maps[mapType](x, y) };
+            }
+        }
+        // Başlangıçlar
+        grid[5][5] = { owner: 1, power: 200, isWater: false }; // Burak (GS)
+        grid[gridCount-6][gridCount-6] = { owner: 2, power: 200, isWater: false }; // Bot 1
+        grid[gridCount-6][5] = { owner: 3, power: 200, isWater: false }; // Bot 2
+    }
 
     function draw() {
+        if (!gameActive) return;
         ctx.clearRect(0, 0, canvas.width, canvas.height);
         let pTotal = 0, eTotal = 0;
 
@@ -59,17 +94,17 @@
                 const px = offsetX + x * cellSize;
                 const py = offsetY + y * cellSize;
 
-                if(cell.isWater) ctx.fillStyle = '#1e2d3c';
-                else if(cell.owner === 1) { ctx.fillStyle = '#a90432'; pTotal += cell.power; }
-                else if(cell.owner === 2) { ctx.fillStyle = '#0074e4'; eTotal += cell.power; }
-                else ctx.fillStyle = '#2a2a2e';
+                if(cell.isWater) ctx.fillStyle = '#0f141a'; // Koyu Deniz
+                else if(cell.owner === 1) { ctx.fillStyle = '#a90432'; pTotal += cell.power; } // GS Kırmızı
+                else if(cell.owner === 2) { ctx.fillStyle = '#0066cc'; eTotal += cell.power; } // Bot 1
+                else if(cell.owner === 3) { ctx.fillStyle = '#cc00cc'; eTotal += cell.power; } // Bot 2
+                else ctx.fillStyle = '#1a1a20'; // Boş Toprak
 
                 ctx.fillRect(px, py, cellSize - 1, cellSize - 1);
                 
-                // GS Sarısı Çerçeve (Sadece oyuncu için)
+                // GS Sarısı Çerçeve
                 if(cell.owner === 1) {
-                    ctx.strokeStyle = '#fdb912';
-                    ctx.lineWidth = 1;
+                    ctx.strokeStyle = '#fdb912'; ctx.lineWidth = 0.5;
                     ctx.strokeRect(px, py, cellSize - 1, cellSize - 1);
                 }
             }
@@ -79,24 +114,22 @@
         requestAnimationFrame(draw);
     }
 
-    // Saldırı Mekaniği
-    function attack(tx, ty, attacker) {
-        if(grid[ty][tx].isWater) return;
+    // Saldırı ve Takviye
+    function handleAction(tx, ty, attacker) {
+        if(!gameActive || grid[ty][tx].isWater) return;
         
-        let bestNeighbor = null;
-        let maxPower = 0;
+        let bestNeighbor = null, maxPower = 0;
         [[0,1],[0,-1],[1,0],[-1,0]].forEach(([dy, dx]) => {
-            let ny = ty+dy, nx = tx+dx;
+            let ny=ty+dy, nx=tx+dx;
             if(ny>=0 && ny<gridCount && nx>=0 && nx<gridCount) {
                 if(grid[ny][nx].owner === attacker && grid[ny][nx].power > maxPower) {
-                    maxPower = grid[ny][nx].power;
-                    bestNeighbor = grid[ny][nx];
+                    maxPower = grid[ny][nx].power; bestNeighbor = grid[ny][nx];
                 }
             }
         });
 
         if(maxPower > 10) {
-            let move = maxPower * 0.7;
+            let move = maxPower * 0.8; // %80 güçle saldır/takviye et
             bestNeighbor.power -= move;
             if(grid[ty][tx].owner !== attacker) {
                 grid[ty][tx].power -= move;
@@ -104,7 +137,7 @@
                     grid[ty][tx].power = Math.abs(grid[ty][tx].power);
                     grid[ty][tx].owner = attacker;
                 }
-            } else {
+            } else { // Kendi toprağına tıklandığında takviye
                 grid[ty][tx].power += move;
             }
         }
@@ -114,19 +147,23 @@
     window.addEventListener('pointerdown', e => {
         const x = Math.floor((e.clientX - offsetX) / cellSize);
         const y = Math.floor((e.clientY - offsetY) / cellSize);
-        if(x>=0 && x<gridCount && y>=0 && y<gridCount) attack(x, y, 1);
+        if(x>=0 && x<gridCount && y>=0 && y<gridCount) handleAction(x, y, 1);
     });
 
-    // Ekonomi (Interest) ve Bot
+    // MEGA HIZLI Ekonomi ve Botlar (Her 100ms)
     setInterval(() => {
-        grid.forEach(row => row.forEach(c => { if(c.owner > 0) c.power = Math.min(c.power * 1.02 + 0.5, 500); }));
-        // Bot Hamlesi
-        let rx = Math.floor(Math.random()*gridCount);
-        let ry = Math.floor(Math.random()*gridCount);
-        attack(rx, ry, 2);
-    }, 500);
+        if(!gameActive) return;
+        grid.forEach(row => row.forEach(c => { 
+            if(c.owner > 0) c.power = Math.min(c.power * 1.05 + 2, 1000); // %5 Faiz + Sabit Artış
+        }));
+        
+        // Bot Hamleleri (Daha agresif)
+        for(let b=2; b<=3; b++) {
+            let rx = Math.floor(Math.random()*gridCount), ry = Math.floor(Math.random()*gridCount);
+            handleAction(rx, ry, b);
+        }
+    }, 100);
 
-    draw();
 </script>
 </body>
 </html>
